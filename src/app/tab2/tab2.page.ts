@@ -1,3 +1,6 @@
+import { DataService } from './../services/data.service';
+import { ShareService } from './../services/share.service';
+import { Message } from './../models/message';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +10,13 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  post : Message = new Message();
+
+  constructor(private shareSrvc: ShareService, private dataSrvc: DataService) {}
+
+  sendMessage(){
+    this.post.from = this.shareSrvc.userName;
+    this.dataSrvc.saveMessage(this.post);
+  }
 
 }
